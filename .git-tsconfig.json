@@ -1,0 +1,1 @@
+{"extends":"./tsconfig.json","include":["*.d.ts","app/types","dist/constants.d.ts","dist/index.d.ts","dist/redis-client.providers.d.ts","dist/redis-module-options.interface.d.ts","dist/redis.module.d.ts","dist/redis.service.d.ts","src/redis-client.providers.ts"]}

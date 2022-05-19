@@ -1,14 +1,14 @@
 import { FactoryProvider } from '@nestjs/common';
-import Redis from 'ioredis';
+import IORedis from 'ioredis';
 import { IRedisModuleOptions } from './redis-module-options.interface';
 import { DEFAULT_REDIS_CLIENT, REDIS_MODULE_OPTIONS, REDIS_CLIENT } from './constants';
 
 /**
  * 通过工厂模式创建redis操作实例的provide
  */
-export const redisClientProvider: FactoryProvider<Promise<Map<string, Redis>>> = {
+export const redisClientProvider: FactoryProvider<Promise<Map<string, IORedis.Redis>>> = {
     useFactory: async (redisModuleOptions: IRedisModuleOptions) => {
-        const redisClientMap = new Map<string, Redis>();
+        const redisClientMap = new Map<string, IORedis.Redis>();
 
         // 如果传递的配置信息为数组格式则，遍历数组创建Redis客户端操作实例
         if (Array.isArray(redisModuleOptions)) {
@@ -44,10 +44,10 @@ export const redisClientProvider: FactoryProvider<Promise<Map<string, Redis>>> =
  * @param redisModuleOptions 连接配置信息
  * @returns Redis连接实例
  */
-async function createRedisClient(redisModuleOptions: IRedisModuleOptions): Promise<Redis> {
+async function createRedisClient(redisModuleOptions: IRedisModuleOptions): Promise<IORedis.Redis> {
     const { onClientReady, url, ...redisOptions } = redisModuleOptions;
     // 优先使用url创建Redis连接
-    const client = url ? new Redis(url) : new Redis(redisOptions);
+    const client = url ? new IORedis(url) : new IORedis(redisOptions);
 
     // 注册Redis连接事件的监听函数
     if (onClientReady) {
