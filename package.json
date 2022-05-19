@@ -1,11 +1,12 @@
 {
-  "name": "@web/nestjs-redis",
-  "version": "0.0.3",
+  "name": "@tiger/nestjs-redis",
+  "version": "0.0.1-alpha.1",
   "description": "Redis(ioredis) module for NestJS framework",
   "author": "caiyangwei@itiger.com",
   "private": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "repository": "https://git.tigerbrokers.net/fed/npm/nestjs-redis",
   "files": [
     "LICENSE",
     "README.md",
