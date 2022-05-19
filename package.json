@@ -1,11 +1,17 @@
 {
-  "name": "nestjs-redis",
-  "version": "0.0.1",
+  "name": "@web/nestjs-redis",
+  "version": "0.0.3",
   "description": "Redis(ioredis) module for NestJS framework",
   "author": "caiyangwei@itiger.com",
-  "private": true,
+  "private": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist/",
+    "src/"
+  ],
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
