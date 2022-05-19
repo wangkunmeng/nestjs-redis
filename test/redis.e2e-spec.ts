@@ -15,6 +15,6 @@ describe('RedisModule', () => {
   it('set test data', async () => {
     let redis = service.getClient();
 
-    await redis.set('test:redis:xxxx', 10000);
+    await redis.set(`test:redis:${new Date().toISOString()}`, Date.now(), 'EX', 10 * 60);
   });
 });
