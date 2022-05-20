@@ -18,10 +18,26 @@ const common_1 = require("@nestjs/common");
 const constants_1 = require("./constants");
 const redis_client_providers_1 = require("./redis-client.providers");
 const redis_service_1 = require("./redis.service");
+/**
+ * Redis模块，管理Nest进程中的IORedis连接
+ */
 let RedisModule = RedisModule_1 = class RedisModule {
     constructor(redisClients) {
         this.redisClients = redisClients;
     }
+    /**
+     * 初始化创建redis连接
+     *
+     * eg:
+     *  RedisModule.register({ url: 'redis://127.0.0.1:6379/3' });
+     *  RedisModule.register([{ name: 'db3', url: 'redis://127.0.0.1:6379/3' }, { name: 'db4', url: 'redis://127.0.0.1:6379/3' }]);
+     *  RedisModule.register({ host: '127.0.0.1', port: 6379, db: 3 });
+     *
+     *  通过配置信息中的onClientReady，可以监听redis相关的事件
+     *
+     * @param options redis配置信息，支持数组格式。如果需要同时连接多个redis db可通过名称进行区分配置
+     * @returns
+     */
     static register(options) {
         return {
             global: true,
@@ -37,7 +53,11 @@ let RedisModule = RedisModule_1 = class RedisModule {
             module: RedisModule_1
         };
     }
+    /**
+     * 应用程序关闭时，释放Redis连接，防止Redis服务器堆积无效的长连接
+     */
     onModuleDestroy() {
+        // 遍历列表Redis连接字典，释放连接
         for (const [key, redisClient] of this.redisClients) {
             redisClient.disconnect();
             common_1.Logger.debug(`name:${key} is `, RedisModule_1.name);

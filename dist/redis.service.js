@@ -19,7 +19,14 @@ let RedisService = class RedisService {
     constructor(redisClients) {
         this.redisClients = redisClients;
     }
+    /**
+     * 获取redis操作客户端
+     *
+     * @param name
+     * @returns
+     */
     getClient(name = constants_1.DEFAULT_REDIS_CLIENT) {
+        // 先判断需要获取的Redis连接实例是否存在
         if (!this.redisClients.has(name)) {
             throw new Error(`name [${name}] is not existed`);
         }
