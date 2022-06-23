@@ -1,7 +1,7 @@
 /**
  * Redis配置信息在Nest进程中的令牌名称
  */
-export const REDIS_MODULE_OPTIONS = Symbol('REDIS_CONFIG_OPTIONS');
+export const REDIS_MODULE_OPTIONS = Symbol('REDIS_MODULE_OPTIONS');
 
 /**
  * Redis客户端在Nest进程中的令牌名称

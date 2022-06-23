@@ -15,25 +15,25 @@ exports.redisClientProvider = void 0;
 const ioredis_1 = require("ioredis");
 const constants_1 = require("./constants");
 /**
- * 通过工厂模式创建redis操作实例的provide
+ * 通过工厂模式创建redis操作实例
  */
 exports.redisClientProvider = {
-    useFactory: async (redisModuleOptions) => {
+    useFactory: (redisModuleOptions) => {
         const redisClientMap = new Map();
-        // 如果传递的配置信息为数组格式则，遍历数组创建Redis客户端操作实例
+        // 如果传递的配置信息为数组格式则遍历数组创建Redis客户端操作实例
         if (Array.isArray(redisModuleOptions)) {
-            await Promise.allSettled(redisModuleOptions.map(async (option) => {
+            redisModuleOptions.forEach(option => {
                 const key = option.name || constants_1.DEFAULT_REDIS_CLIENT;
                 // 不允许设置名称相同的Redis客户端实例
                 if (redisClientMap.has(key)) {
-                    throw new Error(`[RedisService] ${option.name || 'default'} client is exists`);
+                    throw new Error(`[RedisClientProvider] ${key} client is exists`);
                 }
-                redisClientMap.set(key, await createRedisClient(option));
-            }));
+                redisClientMap.set(key, createRedisClient(option));
+            });
         }
         else {
             const key = redisModuleOptions.name || constants_1.DEFAULT_REDIS_CLIENT;
-            redisClientMap.set(key, await createRedisClient(redisModuleOptions));
+            redisClientMap.set(key, createRedisClient(redisModuleOptions));
         }
         return redisClientMap;
     },
@@ -48,7 +48,7 @@ exports.redisClientProvider = {
  * @param redisModuleOptions 连接配置信息
  * @returns Redis连接实例
  */
-async function createRedisClient(redisModuleOptions) {
+function createRedisClient(redisModuleOptions) {
     const { onClientReady, url } = redisModuleOptions, redisOptions = __rest(redisModuleOptions, ["onClientReady", "url"]);
     // 优先使用url创建Redis连接
     const client = url ? new ioredis_1.default(url) : new ioredis_1.default(redisOptions);

@@ -1,6 +1,6 @@
 {
   "name": "@tiger/nestjs-redis",
-  "version": "0.0.1-alpha.6",
+  "version": "0.0.1-alpha.7",
   "description": "Redis(ioredis) module for NestJS framework",
   "author": "caiyangwei@itiger.com",
   "private": false,
@@ -20,16 +20,16 @@
     "test": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@nestjs/common": "^8.0.0",
-    "@nestjs/core": "^8.0.0",
-    "ioredis": "4.28.5"
+    "@nestjs/common": "^8.4.0",
+    "@nestjs/core": "^8.4.0",
+    "ioredis": "^4.28.5"
   },
   "devDependencies": {
     "@commitlint/cli": "13.2.1",
     "@commitlint/config-conventional": "13.2.0",
-    "@nestjs/cli": "^8.0.0",
-    "@nestjs/schematics": "^8.0.0",
-    "@nestjs/testing": "^8.0.0",
+    "@nestjs/cli": "^8.2.4",
+    "@nestjs/schematics": "^8.0.11",
+    "@nestjs/testing": "^8.4.0",
     "@types/express": "^4.17.13",
     "@types/ioredis": "^4.28.10",
     "@types/jest": "27.5.0",
@@ -96,12 +96,14 @@
     "trailingComma": "none",
     "semi": true,
     "singleQuote": true,
-    "overrides": [{
-      "files": "*.json",
-      "options": {
-        "tabWidth": 2
+    "overrides": [
+      {
+        "files": "*.json",
+        "options": {
+          "tabWidth": 2
+        }
       }
-    }],
+    ],
     "arrowParens": "avoid",
     "bracketSameLine": true
   },

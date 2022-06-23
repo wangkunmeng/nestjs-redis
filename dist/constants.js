@@ -4,7 +4,7 @@ exports.DEFAULT_REDIS_CLIENT = exports.REDIS_CLIENT = exports.REDIS_MODULE_OPTIO
 /**
  * Redis配置信息在Nest进程中的令牌名称
  */
-exports.REDIS_MODULE_OPTIONS = Symbol('REDIS_CONFIG_OPTIONS');
+exports.REDIS_MODULE_OPTIONS = Symbol('REDIS_MODULE_OPTIONS');
 /**
  * Redis客户端在Nest进程中的令牌名称
  */

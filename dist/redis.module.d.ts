@@ -7,6 +7,7 @@ import { IRedisModuleOptions } from './redis-module-options.interface';
 export declare class RedisModule implements OnModuleDestroy {
     private readonly redisClients;
     constructor(redisClients: Map<string, Redis>);
+    private readonly logger;
     /**
      * 初始化创建redis连接
      *
@@ -17,12 +18,12 @@ export declare class RedisModule implements OnModuleDestroy {
      *
      *  通过配置信息中的onClientReady，可以监听redis相关的事件
      *
-     * @param options redis配置信息，支持数组格式。如果需要同时连接多个redis db可通过名称进行区分配置
+     * @param options redis配置信息，支持数组格式，如果需要同时连接多个redis db可通过名称进行区分配置。例如:redis读写分离或者连接同一个redis实例的多个db
      * @returns
      */
     static register(options: IRedisModuleOptions | IRedisModuleOptions[]): DynamicModule;
     /**
      * 应用程序关闭时，释放Redis连接，防止Redis服务器堆积无效的长连接
      */
-    onModuleDestroy(): void;
+    onModuleDestroy(): Promise<void>;
 }
